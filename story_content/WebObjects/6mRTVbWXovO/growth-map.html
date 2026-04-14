@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Growth Map</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Poppins, Arial;
+  background: #F3F3F3;
+}
+
+/* Main container */
+#content {
+  padding: 18px;
+}
+
+/* Heading */
+.heading {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* List items */
+.item {
+  font-size: 20px;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+/* Links */
+a {
+  color: #0056b3;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* Payment */
+.payment {
+  margin-top: 18px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* Buttons */
+.btns {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  background: #8900C4;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="content">
+  <div style="font-size:16px;">Loading...</div>
+</div>
+
+<script>
+function renderData(data) {
+  if (!data || !data.links) return;
+
+  var html = "";
+
+  html += "<div class='heading'>Your customized growth map:</div>";
+
+  data.links.forEach(function(link, index){
+    html += "<div class='item'>" +
+      (index+1) + ". <a href='" + link.url + "' target='_blank'>" + link.text + "</a>" +
+    "</div>";
+  });
+
+
+  html += "<div class='btns'>" +
+    "<a class='btn' href='" + data.gmail + "' target='_blank'>Email My Growth Map</a>" +
+    "<a class='btn' href='" + data.qa + "' target='_blank'>Q & A</a>" +
+  "</div>";
+
+  document.getElementById("content").innerHTML = html;
+}
+
+// Listen for Storyline data
+window.addEventListener("message", function(event) {
+  renderData(event.data);
+});
+</script>
+
+</body>
+</html>
